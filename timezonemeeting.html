@@ -1,0 +1,78 @@
+<head>
+ 	<title>timezonemeeting</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato:100,300' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js"></script>
+</head>
+<template name="main">
+	<center>
+		<div class="nav-bar">
+			<p class="header"> Global Meeting Planner </p>
+			<p class="subtitle"> Plan meetings across timezones in realtime! </p>
+		</div>
+	</center>
+	{{> yield}}
+</template>
+<template name="home">
+	<div class="home"> Welcome to Global Meeting Planner! You'll be redirected to a new Meeting page shortly. </div>
+</template>
+<template name="meetingPage">
+	<center>
+		<div class="meetingPage">
+		{{> meetingName}}
+		<p> Your timezone: <span class="timezone">{{timezone}}</span></p>
+		<p> {{> timesForm}} </p>
+		<p> {{> timesPost}} </p>
+		</div>
+	</center>
+</template>
+<template name="timesPost">
+	<div class="timesPost">
+		{{#if times}}
+			{{#each times}}
+				<div class="col-md-3">			
+					<div class="panel panel-default" style="border:none;font-size:15px">
+						<div class="panel-heading" style="background-color:#e74c3c">
+							Name: {{author}}
+						</div>
+						<div class="panel-body" style="background-color:#c0392b;color:#ecf0f1">
+							Start: {{start}}
+							End: {{end}}
+	 	 				</div>
+					</div>
+				</div>
+			{{/each}}
+		{{/if}}
+	</div>
+</template>
+<template name="meetingName">
+	<center>
+		<form class="meetingForm">
+			Name: <input type="text" class="meeting-name changeName" placeholder="Meeting Name..." name="names" value="{{name}}">
+		</form>
+	</center>
+</template>
+<template name="timesForm"> 
+	<form class="form-inline indent">
+	<p> Your Name: <input type="text" class="meeting-name userName" placeholder="..." name="names" required> </p>
+	<p> When are you free? : </p>
+		<div class="form-group">
+				Start:
+			<div class="input-group datetimepicker">
+    			<div class="input-group-addon">
+    				<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+    			</div>
+    				<input class="form-control set-due-date start" type="text" required/>
+  			</div>
+  		</div>
+  		<div class="form-group">
+				End:
+			<div class="input-group datetimepicker">
+    			<div class="input-group-addon">
+    				<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+    			</div>
+    				<input class="form-control set-due-date end" type="text" required/>
+  			</div>
+  		</div>
+  			<button class="btn btn-default" type="submit" name="timeSubmit">Add time</button>
+  	</form>
+</template>

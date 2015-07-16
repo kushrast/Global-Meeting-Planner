@@ -1,0 +1,70 @@
+/* CSS declarations go here */
+.header {
+	font-size: 76px;
+	font-family: 'Lato';
+	font-weight: 100;
+	padding-top:60px;
+	padding-bottom: 20px;
+}
+.subtitle {
+	font-size: 30px;
+	font-family: 'Lato';
+	font-weight: 300;
+	padding-bottom: 20px;
+	background-color: #2980b9;
+}
+p {
+	margin:0;
+}
+.nav-bar {
+	text-align: center;
+	margin: 0 auto;
+	width:100%;
+	background-color: #3498db;
+	color: #ecf0f1
+}
+.home {
+	font-family: 'Lato';
+	padding-top: 20px;
+	text-align: center;
+	font-weight: 300;
+	color: #2c3e50;
+	font-size: 30px;
+}
+.meetingPage {
+	width:60%;
+	font-family: 'Lato';
+	text-align: left;
+	font-weight: 300;
+	color: #2c3e50;
+	font-size: 30px;
+}
+.hue {
+	border:none;
+}
+[name=names]{
+	border:none;
+    font-family: 'Lato';
+    font-size: 30px;
+    text-align: left;
+    color: #7f8c8d;
+    width: 300px
+}
+[name=names]:hover{
+    background-color: #f9f9f9;
+    cursor:pointer;
+}
+.timezone {
+	color: #7f8c8d;
+}
+.meetingForm {
+	padding-top: 25px;
+	padding-bottom: 25px
+}
+.indent {
+	padding-top: 20px;
+}
+.timesPost {
+	padding-top: 25px;
+	font-size: 20px
+}

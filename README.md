@@ -4,16 +4,26 @@ Built with Meteor, GMP offers a real time solution to quickly find the times tha
 navigate to the front page, at which point the application will redirect you to a unique url for your meeting. Share
 this with others in your meeting and they can add the times that they are free.
 
-Meteor Dependencies:
+
+#Meteor Dependencies:
+
 autopublish
+
 insecure
+
 iron:router
+
 meteor-platform
+
 momentjs:moment
+
 tsega:bootstrap3-datetimepicker
+
 twbs:bootstrap
 
-External libraries:
+
+#External libraries:
+
 JS Timezone Detect
 
 

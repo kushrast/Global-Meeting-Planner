@@ -71,40 +71,40 @@ p {
 .time-panel {
 	border:none;font-size:15px
 }
-.turq-panel > .panel-heading {
+.turq-panel > .panel > .panel-heading {
 	background-color: #1abc9c
 }
-.green-panel > .panel-heading {
+.green-panel > .panel > .panel-heading {
 	background-color: #2ecc71
 }
-.purple-panel > .panel-heading {
+.purple-panel > .panel > .panel-heading {
 	background-color: #9b59b6
 }
-.yellow-panel > .panel-heading {
+.yellow-panel > .panel > .panel-heading {
 	background-color: #f1c40f
 }
-.orange-panel > .panel-heading {
+.orange-panel > .panel > .panel-heading {
 	background-color: #e67e22
 }
-.red-panel > .panel-heading {
+.red-panel > .panel > .panel-heading {
 	background-color: #e74c3c
 }
 
-.turq-panel > .panel-body {
+.turq-panel > .panel > .panel-body {
 	background-color: #16a085
 }
-.green-panel > .panel-body {
+.green-panel > .panel > .panel-body {
 	background-color: #27ae60
 }
-.purple-panel > .panel-body {
+.purple-panel > .panel > .panel-body {
 	background-color: #8e44ad
 }
-.yellow-panel > .panel-body {
+.yellow-panel > .panel > .panel-body {
 	background-color: #f39c12
 }
-.orange-panel > .panel-body {
+.orange-panel > .panel > .panel-body {
 	background-color: #d35400
 }
-.red-panel > .panel-body {
+.red-panel > .panel > .panel-body {
 	background-color: #c0392b
 }

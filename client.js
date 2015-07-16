@@ -60,6 +60,9 @@ if (Meteor.isClient) {
         'formatTime': function(time){
             var tz = jstz.determine();
             return moment(time).tz(tz.name()).format('dddd, MMMM Do YYYY, h:mm a z');
+        },
+        'color': function(){
+            
         }
     })
     Template.timesForm.events({

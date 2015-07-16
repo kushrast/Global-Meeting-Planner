@@ -60,7 +60,7 @@ if (Meteor.isClient) {
         'formatTime': function(time){
             var tz = jstz.determine();
             var changedTime= moment.tz(time, tz);
-            return moment(time).format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
+            return moment(changedTime).format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
         }
     })
     Template.timesForm.events({

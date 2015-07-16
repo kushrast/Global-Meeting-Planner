@@ -61,8 +61,42 @@ if (Meteor.isClient) {
             var tz = jstz.determine();
             return moment(time).tz(tz.name()).format('dddd, MMMM Do YYYY, h:mm a z');
         },
-        'color': function(){
-            
+        'color': function(author){
+            var names = Times.find({},{fields: {'author':1}}).fetch();
+            var distinctData = _.uniq(names, false, function(d) {return d.author});
+            var len = distinctData.length;
+            console.log(distinctData);
+            var color;
+            for (i=0; i<len; ++i) {
+                if (i in distinctData) {
+                    s = distinctData[i];
+                    if(s.author == author)
+                    {
+                        var counter = i % 6;
+                        switch(counter){
+                            case 0:
+                                color = "turq"
+                                break
+                            case 1:
+                                color = "green"
+                                break
+                            case 2:
+                                color = "red"
+                                break
+                            case 3:
+                                color = "purple"
+                                break
+                            case 4:
+                                color = "yellow"
+                                break
+                            case 5:
+                                color = "orange"
+                                break
+                        }
+                    }
+                }
+            }
+            return color
         }
     })
     Template.timesForm.events({

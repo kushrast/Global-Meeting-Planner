@@ -59,8 +59,7 @@ if (Meteor.isClient) {
     	},
         'formatTime': function(time){
             var tz = jstz.determine();
-            var changedTime= moment.tz(time, tz);
-            return moment(changedTime).format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
+            return moment(time).tz(tz.name()).format('dddd, MMMM Do YYYY, h:mm a z');
         }
     })
     Template.timesForm.events({
@@ -69,24 +68,24 @@ if (Meteor.isClient) {
     		var meeting = this._id;
     		var tz = jstz.determine();
 			var name = $('.userName').val();
-			var start = $('.start').val();
-			var end = $('.end').val();
-			var startDate = moment.tz(start,tz.name());
-			var endDate = moment.tz(end,tz.name());
+			var start = moment($('.start').val());
+			var end = moment($('.end').val());
 			var now = moment();
-			if(startDate == endDate || startDate > endDate)
+			if(end.isBefore(start) || end.isSame(start))
 			{
 				alert("You cannot end your free time before or at the same time as when it starts.");
 			}
 			else
 			{
-				if(now == startDate || now > startDate)
+				if(now.isAfter(start) || now.isSame(start))
 				{
 					alert("Please start after the present moment.");
 				}
 				else
 				{
-					Meteor.call('addTime',meeting,name,startDate.format(),endDate.format(),function(error,result){
+                    newStart = moment.tz(start,tz.name()).format();
+                    newEnd = moment.tz(end,tz.name()).format();
+					Meteor.call('addTime',meeting,name,newStart,newEnd,function(error,result){
                         if(error){
                             console.log(error.reason);
                         }

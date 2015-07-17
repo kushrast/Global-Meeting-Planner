@@ -52,6 +52,13 @@ if (Meteor.isClient) {
     		}
     	}
     });
+    Template.timesPost.events({
+        'click .timeRemove': function(){
+            var id = this._id;
+            var name = this.author;
+            Meteor.call('removeTime',id);
+        }
+    })
     Template.timesPost.helpers({
     	'times': function(){
     		var meeting_id = this._id;
@@ -65,7 +72,6 @@ if (Meteor.isClient) {
             var names = Times.find({},{fields: {'author':1}}).fetch();
             var distinctData = _.uniq(names, false, function(d) {return d.author});
             var len = distinctData.length;
-            console.log(distinctData);
             var color;
             for (i=0; i<len; ++i) {
                 if (i in distinctData) {
@@ -136,8 +142,58 @@ if (Meteor.isClient) {
 				}
 			}
     	}
-    })
+    });
+    Template.timesCalculate.helpers({
+        'sharedFreeTime': function(){
+            var meeting_id = this._id;
+            var tz = jstz.determine();
+            var allTimes = Times.find({meeting: meeting_id}).fetch();
+            var bestTimes = [];
+            var len = allTimes.length;
+            for (i=0; i<len; ++i) {
+                if (i in allTimes) {
+                    s = allTimes[i];
+                    var counter = 1;
+                    var people = [];
+                    people.push(s.author);
+                    var startMoment = moment(s.start);
+                    var endMoment = moment(s.end);
+                    for (j=i+1; j<len; ++j) {
+                        if (j in allTimes) {
+                            r = allTimes[j];
+                            if(s.author != r.author)
+                            {
+                                var checked = false;
+                                var newStartMoment = moment(r.start);
+                                var newEndMoment = moment(r.end);
+                                if(newStartMoment.isBetween(startMoment,endMoment))
+                                {
+                                    checked = true;
+                                    startMoment = newStartMoment;
+                                    people.push(r.author);
+                                    counter++;
+                                }
+                                if(newEndMoment.isBetween(startMoment,endMoment))
+                                {
+                                    endMoment = newEndMoment;
+                                    if(checked != true)
+                                    {
+                                        counter++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    bestTimes.push([counter,people,endMoment.diff(startMoment, 'hours', true),startMoment.format('dddd, MMMM Do YYYY, h:mm a z'),endMoment.format('dddd, MMMM Do YYYY, h:mm a z')]);
+                }
+            }
+            console.log(bestTimes);
+        }
+    });
 Template.timesForm.onRendered(function() {
     this.$('.datetimepicker').datetimepicker();
+});
+Template.tooltipHelper.onRendered(function(){
+    this.$('[data-toggle="tooltip"]').tooltip();
 });
 }

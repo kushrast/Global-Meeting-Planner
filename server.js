@@ -21,6 +21,11 @@ if (Meteor.isServer) {
 				start: start,
 				end: end
 			})
+		},
+		'removeTime': function(id){
+			Times.remove({
+				_id: id
+			});
 		}
 	});
 }

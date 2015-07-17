@@ -68,6 +68,9 @@ p {
 	padding-top: 25px;
 	font-size: 20px
 }
+.timeRemove:hover {
+	color: #7f8c8d;
+}
 .time-panel {
 	border:none;font-size:15px
 }

@@ -1,5 +1,5 @@
 <head>
- 	<title>timezonemeeting</title>
+ 	<title>Global Meeting Planner</title>
 	<link href='http://fonts.googleapis.com/css?family=Lato:100,300' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js"></script>
 </head>
@@ -22,27 +22,39 @@
 		<p> Your timezone: <span class="timezone">{{timezone}}</span></p>
 		<p> {{> timesForm}} </p>
 		<p> {{> timesPost}} </p>
+		<p> {{> timesCalculate}} </p>
 		</div>
 	</center>
 </template>
+<template name="timesCalculate">
+	<div class="row">
+		{{sharedFreeTime}}
+	</div>
+</template>
 <template name="timesPost">
 	<div class="timesPost">
-		{{#if times}}
-			{{#each times}}
-				<div class="col-md-3 {{color author}}-panel">			
-					<div class="panel panel-default time-panel">
-						<div class="panel-heading">
-							Name: {{author}}
+		<div class="row">
+			{{#if times}}
+				{{#each times}}
+					<div class="col-md-5 {{color author}}-panel">			
+						<div class="panel panel-default time-panel">
+							<div class="panel-heading">
+								{{> tooltipHelper}}
+								 Name: {{author}} 
+							</div>
+							<div class="panel-body">
+								Start: {{formatTime start}}
+								End: {{formatTime end}}
+		 	 				</div>
 						</div>
-						<div class="panel-body">
-							Start: {{formatTime start}}
-							End: {{formatTime end}}
-	 	 				</div>
 					</div>
-				</div>
-			{{/each}}
-		{{/if}}
+				{{/each}}
+			{{/if}}
+		</div>
 	</div>
+</template>
+<template name="tooltipHelper">
+	<span class="glyphicon glyphicon-remove timeRemove" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Delete time?"></span>
 </template>
 <template name="meetingName">
 	<center>

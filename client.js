@@ -148,7 +148,11 @@ if (Meteor.isClient) {
             var meeting_id = this._id;
             var tz = jstz.determine();
             var allTimes = Times.find({meeting: meeting_id}).fetch();
-            var bestTimes = [];
+            var count = 0;
+            var list;
+            var length;
+            var starting;
+            var ending;
             var len = allTimes.length;
             for (i=0; i<len; ++i) {
                 if (i in allTimes) {
@@ -183,11 +187,19 @@ if (Meteor.isClient) {
                                 }
                             }
                         }
+                        if(counter > count)
+                        {
+                            count = counter;
+                            list = people;
+                            length = endMoment.diff(startMoment);
+                            starting = startMoment.format('dddd, MMMM Do YYYY, h:mm a z');
+                            ending = endMoment.format('dddd, MMMM Do YYYY, h:mm a z');
+                        }
                     }
-                    bestTimes.push([counter,people,endMoment.diff(startMoment, 'hours', true),startMoment.format('dddd, MMMM Do YYYY, h:mm a z'),endMoment.format('dddd, MMMM Do YYYY, h:mm a z')]);
                 }
             }
-            console.log(bestTimes);
+            return [count,list,length,starting,ending];
+
         }
     });
 Template.timesForm.onRendered(function() {

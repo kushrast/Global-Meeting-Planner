@@ -172,16 +172,20 @@ if (Meteor.isClient) {
                                 var newEndMoment = moment(r.end);
                                 if(newStartMoment.isBetween(startMoment,endMoment))
                                 {
-                                    checked = true;
                                     startMoment = newStartMoment;
-                                    people.push(r.author);
+                                    if(people.indexOf(r.author) == -1)
+                                    {
+                                    checked = true;
                                     counter++;
+                                    people.push(r.author);
+                                    }
                                 }
                                 if(newEndMoment.isBetween(startMoment,endMoment))
                                 {
                                     endMoment = newEndMoment;
                                     if(checked != true)
                                     {
+                                        people.push(r.author);
                                         counter++;
                                     }
                                 }
@@ -191,15 +195,21 @@ if (Meteor.isClient) {
                         {
                             count = counter;
                             list = people;
-                            length = endMoment.diff(startMoment);
+                            length = endMoment.diff(startMoment,'hours', true);
                             starting = startMoment.format('dddd, MMMM Do YYYY, h:mm a z');
                             ending = endMoment.format('dddd, MMMM Do YYYY, h:mm a z');
                         }
                     }
                 }
             }
-            return [count,list,length,starting,ending];
-
+            if(count > 1)
+            {
+                return count + " people can meet for "+length+" hours from "+starting+" to "+ending;
+            }
+            else
+            {
+                return "No matches found.";
+            }
         }
     });
 Template.timesForm.onRendered(function() {
